@@ -15,11 +15,16 @@ def check_fibonacci(data: Sequence[int]) -> bool:
 
     # checking if the first number in sequence is fibonacci number - function returns "False" if it's not:
     if not data[0] == 0:
-        if not (sqrt(5*(data[0]**2) - 4) % 1 == 0 or sqrt(5*(data[0]**2) + 4) % 1 == 0):
+        if not (
+            sqrt(5 * (data[0] ** 2) - 4) % 1 == 0
+            or sqrt(5 * (data[0] ** 2) + 4) % 1 == 0
+        ):
             return False
 
     # checking if the second number in sequence is fibonacci number - function returns "False" if it's not:
-    if not (sqrt(5*(data[1]**2) - 4) % 1 == 0 or sqrt(5*(data[1]**2) + 4) % 1 == 0):
+    if not (
+        sqrt(5 * (data[1] ** 2) - 4) % 1 == 0 or sqrt(5 * (data[1] ** 2) + 4) % 1 == 0
+    ):
         return False
 
     # checking if a sequence given is fibonacci sequence
