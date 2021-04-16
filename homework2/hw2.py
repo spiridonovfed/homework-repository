@@ -17,8 +17,19 @@ Input: [2,2,1,1,1,2,2]
 Output: 2, 1
 
 """
+from collections import Counter
 from typing import List, Tuple
 
 
 def major_and_minor_elem(inp: List) -> Tuple[int, int]:
-    ...
+    counter = Counter(inp)
+    elements_counted_list = counter.most_common()
+
+    most_common_el = elements_counted_list[0][0]
+    most_common_el_appears = elements_counted_list[0][1]
+    if most_common_el_appears <= len(inp) // 2:
+        most_common_el = "-"
+
+    least_common_el = elements_counted_list[-1][0]
+
+    return most_common_el, least_common_el

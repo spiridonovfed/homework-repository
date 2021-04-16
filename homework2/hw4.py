@@ -22,4 +22,10 @@ from typing import Callable
 
 
 def cache(func: Callable) -> Callable:
-    ...
+    def wrapper(*args):
+        if args in wrapper.cache:
+            return wrapper.cache[args]
+        result = wrapper.cache[args] = func(*args)
+        return result
+    wrapper.cache = {}
+    return wrapper
