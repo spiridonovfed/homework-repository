@@ -27,5 +27,6 @@ def cache(func: Callable) -> Callable:
             return wrapper.cache[args]
         result = wrapper.cache[args] = func(*args)
         return result
+
     wrapper.cache = {}
     return wrapper
