@@ -19,8 +19,23 @@ Write a function that detects if a number is Armstrong number in functionaly sty
 
 
 def is_armstrong(number: int) -> bool:
-    ...
+    def number_to_iterable(number_as_int):
+        return str(number_as_int)
+
+    def digits_to_power(number_as_iterable):
+        result = list(
+            map(lambda x: int(x) ** len(number_as_iterable), number_as_iterable)
+        )
+        return result
+
+    return sum(digits_to_power(number_to_iterable(number))) == number
 
 
-assert is_armstrong(153) is True, 'Is Armstrong number'
-assert is_armstrong(10) is False, 'Is not Armstrong number'
+# # Or more simple and cleaner option:
+# def is_armstrong(number: int) -> bool:
+#     number_as_iterable = str(number)
+#     digits_to_the_power = [int(digit)**len(number_as_iterable) for digit in number_as_iterable]
+#     if sum(digits_to_the_power) == number:
+#         return True
+#     else:
+#         return False
