@@ -1,5 +1,7 @@
 from unittest import mock
 
+import pytest
+
 from homework4.task_2_mock_input import count_dots_on_i
 
 
