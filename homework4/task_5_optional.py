@@ -12,14 +12,14 @@ Definition of done:
  - function has tests
 
 
->>> list(fizzbuzz(5))
-["1", "2", "fizz", "4", "buzz"]
+# >>> list(fizzbuzz(5))
+# ["1", "2", "fizz", "4", "buzz"]
 
 * https://en.wikipedia.org/wiki/Fizz_buzz
 ** https://www.youtube.com/watch?v=NSzsYWckGd4
 """
-from typing import List, Generator
-
-
-def fizzbuzz(n: int) -> Generator[str]:
-    pass
+# from typing import List, Generator
+#
+#
+# def fizzbuzz(n: int) -> Generator[str]:
+#     pass

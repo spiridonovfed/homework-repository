@@ -29,4 +29,14 @@ You will learn:
 
 
 def read_magic_number(path: str) -> bool:
-    ...
+    with open(path) as file:
+        data = file.readline()
+
+    try:
+        if 1 <= float(data) < 3:
+            return True
+        else:
+            return False
+
+    except:
+        raise ValueError("Something went wrong")

@@ -22,6 +22,12 @@ You will learn:
  - how to test output to the stderr and stdout
 """
 
+import sys
+
 
 def my_precious_logger(text: str):
-    pass
+    if text.startswith("error"):
+        sys.stderr.write(text)
+    else:
+        sys.stdout.write(text)
+        # or print(text)
