@@ -18,8 +18,9 @@ Definition of done:
 * https://en.wikipedia.org/wiki/Fizz_buzz
 ** https://www.youtube.com/watch?v=NSzsYWckGd4
 """
-# from typing import List, Generator
-#
-#
-# def fizzbuzz(n: int) -> Generator[str]:
-#     pass
+from typing import Generator
+
+
+def fizzbuzz(n: int) -> Generator:
+    for i in range(1, n + 1):
+        yield [f"{i}", f"fizz", f"buzz", f"fizzbuzz"][(i % 3 == 0) + 2 * (i % 5 == 0)]
