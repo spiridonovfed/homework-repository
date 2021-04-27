@@ -23,3 +23,7 @@ def test_positive_case3():
 
 def test_negative_case3():
     assert not is_armstrong(400)
+
+
+def test_case_with_negative_number():
+    assert not is_armstrong(-44)

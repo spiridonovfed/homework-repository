@@ -27,6 +27,8 @@ Example::
 
 
 def cache(times):
+    initial_times = times
+
     def the_real_decorator(function):
         def wrapper(*args):
             nonlocal times
@@ -34,6 +36,7 @@ def cache(times):
                 times -= 1
                 return memory[args]
             result = memory[args] = function(*args)
+            times = initial_times
             return result
 
         memory = {}

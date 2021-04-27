@@ -28,7 +28,9 @@ def is_armstrong(number: int) -> bool:
         )
         return result
 
-    return sum(digits_to_power(number_to_iterable(number))) == number
+    return (number >= 0) and (
+        sum(digits_to_power(number_to_iterable(number))) == number
+    )
 
 
 # # Or more simple and cleaner option:
