@@ -35,7 +35,7 @@ def format_word_wraps(data):
 
 
 def get_longest_diverse_words(file_path: str) -> List[str]:
-    """ Finds 10 longest words consisting from largest amount of unique symbols """
+    """Finds 10 longest words consisting from largest amount of unique symbols"""
 
     # opening and formatting the data:
     with open(file_path, encoding="unicode-escape") as file:
@@ -56,7 +56,6 @@ def get_longest_diverse_words(file_path: str) -> List[str]:
             if not letter in unique_letters:
                 unique_letters.append(letter)
         words_dict[word] = len(unique_letters)
-
     # sorting created dictionary by key and getting 10 longest diverse words
     longest_diverse_words = sorted(words_dict, key=words_dict.get, reverse=True)[:10]
     return longest_diverse_words

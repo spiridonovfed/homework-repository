@@ -11,7 +11,7 @@ from typing import Sequence
 
 
 def check_fibonacci(data: Sequence[int]) -> bool:
-    """ Checking if sequence given is a fibonacci sequence """
+    """Checking if sequence given is a fibonacci sequence"""
 
     # checking if the first number in sequence is fibonacci number -
     # function returns "False" if it's not:
@@ -21,14 +21,12 @@ def check_fibonacci(data: Sequence[int]) -> bool:
             or sqrt(5 * (data[0] ** 2) + 4) % 1 == 0
         ):
             return False
-
     # checking if the second number in sequence is fibonacci number -
     # function returns "False" if it's not:
     if not (
         sqrt(5 * (data[1] ** 2) - 4) % 1 == 0 or sqrt(5 * (data[1] ** 2) + 4) % 1 == 0
     ):
         return False
-
     # checking if a sequence given is fibonacci sequence
     index = 0
     while index < len(data) - 2:
@@ -36,5 +34,4 @@ def check_fibonacci(data: Sequence[int]) -> bool:
             index += 1
         else:
             return False
-
     return True
