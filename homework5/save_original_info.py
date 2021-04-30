@@ -19,8 +19,21 @@ print(custom_sum.__original_func)  # <function custom_sum at <some_id>>
 import functools
 
 
+def save__name__doc__func(original_func):
+    def decorator(func):
+        def inner(*args, **kwargs):
+            return func(*args, **kwargs)
+
+        inner.__name__ = original_func.__name__
+        inner.__doc__ = original_func.__doc__
+        inner.__original_func = original_func
+        return inner
+
+    return decorator
+
+
 def print_result(func):
-    # Place for new decorator
+    @save__name__doc__func(func)
     def wrapper(*args, **kwargs):
         """Function-wrapper which print result of an original function"""
         result = func(*args, **kwargs)
@@ -32,17 +45,17 @@ def print_result(func):
 
 @print_result
 def custom_sum(*args):
-    """This function can sum any objects which have __add___"""
+    """This function can sum any objects which have __add__"""
     return functools.reduce(lambda x, y: x + y, args)
 
 
-if __name__ == "__main__":
-    custom_sum([1, 2, 3], [4, 5])
-    custom_sum(1, 2, 3, 4)
-
-    print(custom_sum.__doc__)
-    print(custom_sum.__name__)
-    without_print = custom_sum.__original_func
-
-    # the result returns without printing
-    without_print(1, 2, 3, 4)
+# if __name__ == "__main__":
+#     custom_sum([1, 2, 3], [4, 5])
+#     custom_sum(1, 2, 3, 4)
+#
+#     print(custom_sum.__doc__)
+#     print(custom_sum.__name__)
+#     without_print = custom_sum.__original_func
+#
+#     # the result returns without printing
+#     without_print(1, 2, 3, 4)
