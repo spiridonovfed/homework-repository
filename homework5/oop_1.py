@@ -68,7 +68,8 @@ class Teacher:
         self.first_name = first_name
         self.last_name = last_name
 
-    def create_homework(self, *args):
+    @staticmethod
+    def create_homework(*args):
         return Homework(*args)
 
 
