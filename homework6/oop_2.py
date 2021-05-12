@@ -52,33 +52,122 @@ PEP8 соблюдать строго.
 import datetime
 from collections import defaultdict
 
+# -------------Custom Errors------------------- #
 
-if __name__ == '__main__':
-    opp_teacher = Teacher('Daniil', 'Shadrin')
-    advanced_python_teacher = Teacher('Aleksandr', 'Smetanin')
 
-    lazy_student = Student('Roman', 'Petrov')
-    good_student = Student('Lev', 'Sokolov')
+class DeadlineError(Exception):
+    """You are late"""
 
-    oop_hw = opp_teacher.create_homework('Learn OOP', 1)
-    docs_hw = opp_teacher.create_homework('Read docs', 5)
 
-    result_1 = good_student.do_homework(oop_hw, 'I have done this hw')
-    result_2 = good_student.do_homework(docs_hw, 'I have done this hw too')
-    result_3 = lazy_student.do_homework(docs_hw, 'done')
-    try:
-        result_4 = HomeworkResult(good_student, "fff", "Solution")
-    except Exception:
-        print('There was an exception here')
-    opp_teacher.check_homework(result_1)
-    temp_1 = opp_teacher.homework_done
+class RepeatedResultError(Exception):
+    """This homework result has been accepted previously"""
 
-    advanced_python_teacher.check_homework(result_1)
-    temp_2 = Teacher.homework_done
-    assert temp_1 == temp_2
 
-    opp_teacher.check_homework(result_2)
-    opp_teacher.check_homework(result_3)
+# ------------------People-------------------- #
 
-    print(Teacher.homework_done[oop_hw])
-    Teacher.reset_results()
+
+class Person:
+    def __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+
+
+class Student(Person):
+    def do_homework(self, homework, result):
+        if homework.is_active():
+            return HomeworkResult(self, homework, result)
+        else:
+            raise DeadlineError("You are late")
+
+
+class Teacher(Person):
+    homework_done = defaultdict(list)
+
+    @staticmethod
+    def create_homework(*args):
+        return Homework(*args)
+
+    def check_homework(self, homework_result):
+
+        if isinstance(homework_result, HomeworkResult):
+            if len(homework_result.solution) > 5:
+                if homework_result not in self.homework_done[homework_result.homework]:
+                    self.homework_done[homework_result.homework].append(homework_result)
+                else:
+                    raise RepeatedResultError(
+                        "This homework result has been accepted previously"
+                    )
+
+                return True
+            else:
+                return False
+
+        else:
+            raise TypeError("You gave a not HomeworkResult object")
+
+    @classmethod
+    def reset_results(cls, homework=None):
+        if homework and isinstance(homework, Homework):
+            cls.homework_done[homework].clear()
+        else:
+            cls.homework_done.clear()
+
+
+# ---------Homework and Homework Result------- #
+
+
+class Homework:
+    def __init__(self, task_text, task_timedelta):
+        self.text = task_text
+        self.created = datetime.datetime.now()
+        self.deadline = datetime.timedelta(days=task_timedelta)
+
+    def is_active(self):
+        """returns True if deadline is not passed, False otherwise"""
+        return datetime.datetime.now() < self.created + self.deadline
+
+
+class HomeworkResult:
+    def __init__(self, author, homework, solution):
+        self.author = author
+
+        if isinstance(homework, Homework):
+            self.homework = homework
+        else:
+            raise TypeError("You gave a not Homework object")
+
+        self.solution = solution
+        self.created = datetime.datetime.now()
+
+
+# if __name__ == "__main__":
+#     opp_teacher = Teacher("Daniil", "Shadrin")
+#     advanced_python_teacher = Teacher("Aleksandr", "Smetanin")
+#
+#     lazy_student = Student("Roman", "Petrov")
+#     good_student = Student("Lev", "Sokolov")
+#
+#     oop_hw = opp_teacher.create_homework("Learn OOP", 1)
+#     docs_hw = opp_teacher.create_homework("Read docs", 5)
+#
+#     result_1 = good_student.do_homework(oop_hw, "I have done this hw")
+#     result_2 = good_student.do_homework(docs_hw, "I have done this hw too")
+#     result_3 = lazy_student.do_homework(docs_hw, "done")
+#
+#     try:
+#         result_4 = HomeworkResult(good_student, "fff", "Solution")
+#     except Exception:
+#         print("There was an exception here")
+#
+#     opp_teacher.check_homework(result_1)
+#     temp_1 = opp_teacher.homework_done
+#
+#     # advanced_python_teacher.check_homework(result_1) # Returns RepeatedResultError
+#     temp_2 = Teacher.homework_done
+#     assert temp_1 == temp_2
+#
+#     opp_teacher.check_homework(result_2)
+#     opp_teacher.check_homework(result_3)
+#
+#     print(Teacher.homework_done[oop_hw])
+#     Teacher.reset_results()
