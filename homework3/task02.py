@@ -35,6 +35,6 @@ def slow_calculate(value):
 if __name__ == "__main__":
     start_time = time.time()
     with Pool(50) as p:
-        list_of_sums = p.map(slow_calculate, range(500))
+        list_of_sums = p.map(slow_calculate, range(501))
         print(sum(list_of_sums))
     print(f"Calculation took {time.time() - start_time} seconds")

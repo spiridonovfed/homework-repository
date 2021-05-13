@@ -1,6 +1,9 @@
+import pytest
+
 from homework2.hw4 import cache
 
 
+@pytest.mark.skip(reason="homework is approved")
 def test_positive_case1():
     """Testing example from the task"""
 
@@ -17,6 +20,7 @@ def test_positive_case1():
     assert val_1 is val_2
 
 
+@pytest.mark.skip(reason="homework is approved")
 def test_negative_case1():
     """Testing example from the task, but without caching"""
 
@@ -31,6 +35,7 @@ def test_negative_case1():
     assert not val_1 is val_2
 
 
+@pytest.mark.skip(reason="homework is approved")
 def test_positive_case2():
     """Testing recursive method of finding 100th Fibonacci number - not possible without caching"""
 

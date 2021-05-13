@@ -3,6 +3,7 @@ import pytest
 from homework4.task_1_read_file import read_magic_number
 
 
+@pytest.mark.skip(reason="homework is approved")
 def test_positive_case1(tmp_path):
     d = tmp_path / "sub"
     d.mkdir()
@@ -12,6 +13,7 @@ def test_positive_case1(tmp_path):
     assert read_magic_number(p) == True
 
 
+@pytest.mark.skip(reason="homework is approved")
 def test_positive_case2(tmp_path):
     d = tmp_path / "sub"
     d.mkdir()
@@ -21,6 +23,7 @@ def test_positive_case2(tmp_path):
     assert read_magic_number(p) == True
 
 
+@pytest.mark.skip(reason="homework is approved")
 def test_positive_case3(tmp_path):
     d = tmp_path / "sub"
     d.mkdir()
@@ -30,6 +33,7 @@ def test_positive_case3(tmp_path):
     assert read_magic_number(p) == False
 
 
+@pytest.mark.skip(reason="homework is approved")
 def test_positive_case4(tmp_path):
     d = tmp_path / "sub"
     d.mkdir()
@@ -39,6 +43,7 @@ def test_positive_case4(tmp_path):
     assert read_magic_number(p) == False
 
 
+@pytest.mark.skip(reason="homework is approved")
 def test_positive_case5(tmp_path):
     d = tmp_path / "sub"
     d.mkdir()
@@ -48,6 +53,7 @@ def test_positive_case5(tmp_path):
     assert read_magic_number(p) == False
 
 
+@pytest.mark.skip(reason="homework is approved")
 def test_negative_case1(tmp_path):
     d = tmp_path / "sub"
     d.mkdir()
@@ -57,6 +63,7 @@ def test_negative_case1(tmp_path):
     assert read_magic_number(p) == True
 
 
+@pytest.mark.skip(reason="homework is approved")
 def test_negative_case2(tmp_path):
     d = tmp_path / "sub"
     d.mkdir()
@@ -66,6 +73,7 @@ def test_negative_case2(tmp_path):
     assert read_magic_number(p) == False
 
 
+@pytest.mark.skip(reason="homework is approved")
 def test_negative_case3(tmp_path):
     d = tmp_path / "sub"
     d.mkdir()
@@ -75,6 +83,7 @@ def test_negative_case3(tmp_path):
     assert pytest.raises(ValueError)
 
 
+@pytest.mark.skip(reason="homework is approved")
 def test_negative_case4(tmp_path):
     d = tmp_path / "sub"
     d.mkdir()
