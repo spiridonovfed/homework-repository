@@ -33,6 +33,7 @@ example_tree = {
 def find_occurrences(tree: dict, element: Any) -> int:
     return get_occurrence_of_value(tree, element)
 
+
 # # Option 2
 # def find_occurrences(tree: dict, element: Any) -> int:
 #     return str(tree).count(str(element))

@@ -31,4 +31,6 @@ def test_for_absent_value():
 
 
 def test_find_occurence_of_nested_list():
-    assert find_occurrences(example_tree, ["simple", "list", "of", "RED", "valued"]) == 1
+    assert (
+        find_occurrences(example_tree, ["simple", "list", "of", "RED", "valued"]) == 1
+    )
