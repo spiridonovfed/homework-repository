@@ -89,21 +89,18 @@ class Teacher(Person):
 
     def check_homework(self, homework_result):
 
-        if isinstance(homework_result, HomeworkResult):
-            if len(homework_result.solution) > 5:
-                if homework_result not in self.homework_done[homework_result.homework]:
-                    self.homework_done[homework_result.homework].append(homework_result)
-                else:
-                    raise RepeatedResultError(
-                        "This homework result has been accepted previously"
-                    )
-
-                return True
-            else:
-                return False
-
-        else:
+        if not isinstance(homework_result, HomeworkResult):
             raise TypeError("You gave a not HomeworkResult object")
+
+        if homework_result in self.homework_done[homework_result.homework]:
+            raise RepeatedResultError(
+                "This homework result has been accepted previously"
+            )
+
+        if len(homework_result.solution) > 5:
+            self.homework_done[homework_result.homework].append(homework_result)
+        else:
+            return False
 
     @classmethod
     def reset_results(cls, homework=None):
