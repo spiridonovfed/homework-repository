@@ -99,6 +99,7 @@ class Teacher(Person):
 
         if len(homework_result.solution) > 5:
             self.homework_done[homework_result.homework].append(homework_result)
+            return True
         else:
             return False
 
