@@ -8,9 +8,6 @@ Tree can only contains basic structures like:
 """
 from typing import Any
 
-# Using nested-lookup package (https://pypi.org/project/nested-lookup/)
-from nested_lookup import get_occurrence_of_value
-
 # Example tree:
 example_tree = {
     "first": ["RED", "BLUE"],
@@ -29,14 +26,19 @@ example_tree = {
     "fourth": "RED",
 }
 
+
 # Option 1
 def find_occurrences(tree: dict, element: Any) -> int:
-    return get_occurrence_of_value(tree, element)
+    return str(tree).count(str(element))
 
 
-# # Option 2
+# # Or Option 2
+# # Using nested-lookup package (https://pypi.org/project/nested-lookup/)
+# from nested_lookup import get_occurrence_of_value
+#
+#
 # def find_occurrences(tree: dict, element: Any) -> int:
-#     return str(tree).count(str(element))
+#     return get_occurrence_of_value(tree, element)
 
 
 if __name__ == "__main__":
