@@ -68,5 +68,8 @@ instruction = """
  - Change directory to root folder of "homework-repository"
     cd homework-repository
  - Run a doctest inside 'task_4_doctest.py' file
+    - using pytest:
     pytest --doctest-modules homework4/task_4_doctest.py
+    - or using doctest module:
+    python -m doctest -v homework4/task_4_doctest.py
 """
