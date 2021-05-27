@@ -1,0 +1,4 @@
+My name is Fedor.
+I am 28 years old.
+I live in Saint-Petersburg.
+I am on the way to become Python-developer.
