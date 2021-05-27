@@ -2,7 +2,7 @@ from pathlib import Path
 
 from homework9.hw3 import universal_file_counter
 
-test_dir = Path('./tests/homework9/')
+test_dir = Path("./tests/homework9/")
 
 
 def test_from_example_1():
