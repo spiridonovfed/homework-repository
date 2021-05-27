@@ -2,7 +2,7 @@ from pathlib import Path
 
 from homework9.hw3 import universal_file_counter
 
-test_dir = Path("./")
+test_dir = Path('./tests/homework9/')
 
 
 def test_from_example_1():
@@ -13,7 +13,7 @@ def test_from_example_2():
     assert universal_file_counter(test_dir, "txt", str.split) == 6
 
 
-test_subfolder = Path("./test_subfolder")
+test_subfolder = Path("./tests/homework9/test_subfolder")
 
 
 def test_count_lines():
