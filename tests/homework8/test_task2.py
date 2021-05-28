@@ -10,8 +10,8 @@ def test_len_function():
 
 
 def test_getitem_function():
-    assert presidents["Yeltsin"] == ("Yeltsin", 999, "Russia")
-    assert books["1984"] == ("1984", "Orwell")
+    assert presidents["Yeltsin"] == {"name": "Yeltsin", "age": 999, "country": "Russia"}
+    assert books["1984"] == {"name": "1984", "author": "Orwell"}
 
 
 def test_contains_function_positive_cases():

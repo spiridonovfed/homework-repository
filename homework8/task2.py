@@ -1,6 +1,13 @@
 import sqlite3
 
 
+def dict_factory(cursor, row):
+    d = {}
+    for idx, col in enumerate(cursor.description):
+        d[col[0]] = row[idx]
+    return d
+
+
 class TableData:
     """This is a wrapper class TableData for database table, that when
     initialized with database name and table acts as collection object
@@ -16,7 +23,7 @@ class TableData:
         self.database_name = database_name
         self.table_name = table_name
         self.connection = sqlite3.connect(self.database_name)
-        self.connection.row_factory = sqlite3.Row
+        self.connection.row_factory = dict_factory
         self.cursor = self.connection.cursor()
 
     def __len__(self):
@@ -26,7 +33,7 @@ class TableData:
         :rtype: int
         """
         self.cursor.execute(f"SELECT COUNT(*) from {self.table_name}")
-        return self.cursor.fetchone()[0]
+        return self.cursor.fetchone()["COUNT(*)"]
 
     def __getitem__(self, item):
         """Gets a whole row of data with tabledata[name] notation
@@ -39,7 +46,7 @@ class TableData:
         self.cursor.execute(
             f"SELECT * from {self.table_name} WHERE name=:item", {"item": item}
         )
-        return tuple(self.cursor.fetchone())
+        return self.cursor.fetchone()
 
     def __contains__(self, item):
         """Checks if there is an element in a tabledata with the name given
