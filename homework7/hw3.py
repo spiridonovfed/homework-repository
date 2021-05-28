@@ -23,32 +23,35 @@ from collections import Counter
 from typing import List
 
 
+def get_horizontal_and_vertical_indexes(any_board):
+    """returns a list of horizontal and vertical lines cells' indexes"""
+    horizontal_lines_indexes = []
+    vertical_lines_indexes = []
+    for index_1, sublist in enumerate(any_board):
+        horizontal_line_indexes = []
+        vertical_line_indexes = []
+        for index_2, symbol in enumerate(sublist):
+            horizontal_line_indexes.append((index_1, index_2))
+            vertical_line_indexes.append((index_2, index_1))
+        horizontal_lines_indexes.append(horizontal_line_indexes)
+        vertical_lines_indexes.append(vertical_line_indexes)
+
+    return horizontal_lines_indexes + vertical_lines_indexes
+
+
+def get_diagonal_indexes(any_board):
+    """returns a list of diagonal lines cells' indexes"""
+    diagonal_line_1_indexes = []
+    for index, sublist in enumerate(any_board):
+        diagonal_line_1_indexes.append((index, index))
+    diagonal_line_2_indexes = []
+    for index, sublist in enumerate(any_board):
+        diagonal_line_2_indexes.append((index, len(sublist) - index - 1))
+
+    return [diagonal_line_1_indexes] + [diagonal_line_2_indexes]
+
+
 def tic_tac_toe_checker(board: List[List]) -> str:
-    def get_horizontal_and_vertical_indexes(any_board):
-        """returns a list of horizontal and vertical lines cells' indexes"""
-        horizontal_lines_indexes = []
-        vertical_lines_indexes = []
-        for index_1, sublist in enumerate(any_board):
-            horizontal_line_indexes = []
-            vertical_line_indexes = []
-            for index_2, symbol in enumerate(sublist):
-                horizontal_line_indexes.append((index_1, index_2))
-                vertical_line_indexes.append((index_2, index_1))
-            horizontal_lines_indexes.append(horizontal_line_indexes)
-            vertical_lines_indexes.append(vertical_line_indexes)
-
-        return horizontal_lines_indexes + vertical_lines_indexes
-
-    def get_diagonal_indexes(any_board):
-        """returns a list of diagonal lines cells' indexes"""
-        diagonal_line_1_indexes = []
-        for index, sublist in enumerate(any_board):
-            diagonal_line_1_indexes.append((index, index))
-        diagonal_line_2_indexes = []
-        for index, sublist in enumerate(any_board):
-            diagonal_line_2_indexes.append((index, len(sublist) - index - 1))
-
-        return [diagonal_line_1_indexes] + [diagonal_line_2_indexes]
 
     all_lines_indexes = get_horizontal_and_vertical_indexes(
         board

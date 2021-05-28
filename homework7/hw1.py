@@ -27,19 +27,37 @@ example_tree = {
 }
 
 
-# Option 1
+#######################################################
 def find_occurrences(tree: dict, element: Any) -> int:
-    return str(tree).count(str(element))
+    def iteritems(d, **kw):
+        """Returns iterator of dictionary's items"""
+        return iter(d.items(**kw))
+
+    def recursion(dictionary, item):
+        """Recursively searches for item and increments counter"""
+        nonlocal counter
+
+        if dictionary.get(item) is not None:
+            counter += 1
+        elif item in list(dictionary.values()):
+            counter += list(dictionary.values()).count(item)
+
+        for key, value in iteritems(dictionary):
+            if isinstance(value, dict):
+                recursion(value, item)
+            elif isinstance(value, list):
+                for list_item in value:
+                    if hasattr(list_item, "items"):
+                        recursion(list_item, item)
+                    elif list_item == item:
+                        counter += 1
+
+    counter = 0
+    # Applying recursive search to tree passed in
+    recursion(tree, element)
+
+    return counter
 
 
-# # Or Option 2
-# # Using nested-lookup package (https://pypi.org/project/nested-lookup/)
-# from nested_lookup import get_occurrence_of_value
-#
-#
-# def find_occurrences(tree: dict, element: Any) -> int:
-#     return get_occurrence_of_value(tree, element)
-
-
-if __name__ == "__main__":
-    print(find_occurrences(example_tree, "RED"))  # 6
+# if __name__ == "__main__":
+#     print(find_occurrences(example_tree, "RED"))  # 6

@@ -28,9 +28,3 @@ def test_positive_case1():
 
 def test_for_absent_value():
     assert find_occurrences(example_tree, "absent value") == 0
-
-
-def test_find_occurence_of_nested_list():
-    assert (
-        find_occurrences(example_tree, ["simple", "list", "of", "RED", "valued"]) == 1
-    )

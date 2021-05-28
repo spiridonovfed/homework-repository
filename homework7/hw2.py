@@ -20,15 +20,16 @@ Examples:
 """
 
 
-def backspace_compare(first: str, second: str):
-    def after_backspace(text):
-        """Imitates backspace"""
-        result = []
-        for symbol in text:
-            if symbol != "#":
-                result.append(symbol)
-            elif result:
-                result.pop()
-        return result
+def after_backspace(text):
+    """Imitates backspace"""
+    result = []
+    for symbol in text:
+        if symbol != "#":
+            result.append(symbol)
+        elif result:
+            result.pop()
+    return result
 
+
+def backspace_compare(first: str, second: str):
     return after_backspace(first) == after_backspace(second)
