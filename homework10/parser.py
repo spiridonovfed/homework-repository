@@ -92,14 +92,14 @@ for company_page in companies_personal_pages:
     stock_prices.append(stock_price_in_roubles)
 
     # Getting P/E
-    p_e_ratio_raw = soup.select(".snapshot .snapshot__data-item")[8].getText()
+    p_e_ratio_raw = soup.select(".snapshot .snapshot__data-item")[6].getText()
     p_e_ratio = float(p_e_ratio_raw.strip().split()[0].replace(",", ""))
     p_e_ratios.append(p_e_ratio)
 
     # Calculating potential profits
-    week_low_52_raw = soup.select(".snapshot .snapshot__data-item")[6].getText()
+    week_low_52_raw = soup.select(".snapshot .snapshot__data-item")[4].getText()
     week_low_52 = float(week_low_52_raw.strip().split()[0].replace(",", ""))
-    week_high_52_raw = soup.select(".snapshot .snapshot__data-item")[7].getText()
+    week_high_52_raw = soup.select(".snapshot .snapshot__data-item")[5].getText()
     week_high_52 = float(week_high_52_raw.strip().split()[0].replace(",", ""))
 
     possible_profit = (week_high_52 - week_low_52) / week_low_52
@@ -108,15 +108,24 @@ for company_page in companies_personal_pages:
 
 # Creating resulting list of dicts and resulting jsons
 main_result_data = []
-for index in range(len(companies_links)):
+
+for code, name, link, stock_price, p_e, growth, potential_profit in zip(
+    company_codes,
+    companies_names,
+    companies_links,
+    stock_prices,
+    p_e_ratios,
+    companies_growth,
+    possible_profits,
+):
     company_dict = {
-        "code": company_codes[index],
-        "name": companies_names[index],
-        "link": companies_links[index],
-        "stock price": stock_prices[index],
-        "P/E": p_e_ratios[index],
-        "growth": companies_growth[index],
-        "potential profit": possible_profits[index],
+        "code": code,
+        "name": name,
+        "link": link,
+        "stock price": stock_price,
+        "P/E": p_e,
+        "growth": growth,
+        "potential profit": potential_profit,
     }
     main_result_data.append(company_dict)
 
