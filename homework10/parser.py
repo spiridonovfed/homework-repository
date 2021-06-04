@@ -35,7 +35,7 @@ async def request_worker(session, url):
 
 urls = [
     f"https://markets.businessinsider.com/index/components/s&p_500?p={i}"
-    for i in range(1, 11)
+    for i in range(1, 12)
 ]
 
 loop = asyncio.get_event_loop()
