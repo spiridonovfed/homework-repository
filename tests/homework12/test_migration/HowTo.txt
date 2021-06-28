@@ -1,0 +1,12 @@
+To recreate a database with migration file
+change current direction to 'test_migration' (cd ......)
+and type into terminal:
+
+pip install flask
+pip install Flask-SQLAlchemy
+pip install Flask-Migrate
+
+flask db upgrade
+
+-----------------
+migrated.db appeared in current directory
